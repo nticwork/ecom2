@@ -11,7 +11,7 @@
     <thead>
       <tr>
         <th scope="col">Nom_Produit</th>
-        <th scope="col">Prix</th>
+        <th scope="col">Prix_Produit</th>
         <th scope="col">Image</th>
          <th scope="col">Actions</th>
       </tr>
@@ -23,8 +23,8 @@
     <td>{{$item->nom  }}</td>
     <td>{{$item['prix']  }}DH</td>
      <td>    <img src="{{$item['image']}}" alt="Image " class="img-fluid" width="100"></td>
-    
-    
+
+
       <td style="display: flex">
         <a class="btn btn-warning" href="produits/{{ $item->id }}/edit">Modifier</a>
         &nbsp;&nbsp;
@@ -62,9 +62,9 @@
 
     </td>
 
-    
-    
-    
+
+
+
     </tr>
 
 @endforeach
