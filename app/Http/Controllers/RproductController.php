@@ -117,17 +117,58 @@ $imageUrl = $result['secure_url'];
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+     public function edit(string $id)
     {
-        //
+        $produit=Produit::find($id);
+       return view('edit')->with('produit', $produit);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AddProductRequest $request, $id)
     {
-        //
+        $request->validated();
+
+        // récupérer les nouvelles valeurs des champs :
+        $nom=$request->input('nom');
+        $prix=$request->input('prix');
+        $categorie=$request->input('categorie');
+
+        $image='';
+
+
+
+       // récupérer l'objet Produit via l'id
+
+        $Produit=Produit::find($id);
+
+       // update with save
+
+
+
+         $Produit->nom=$nom;
+         $Produit->prix=$prix;
+         $Produit->categorie=$categorie;
+         if($request->hasFile('image')) {
+            $image=$request->file('image')->getClientOriginalName();
+// enregistrer dans le dossier (public\images)
+
+
+$request->file('image')->move(public_path('imgs'), $image);
+
+        }else{
+            $image= $Produit->image;
+        }
+         $Produit->image=$image;
+
+
+         $Produit->save();
+
+
+
+          return back()->with('successupdate','You have successfully updated a product.');
+
     }
 
     /**
@@ -135,6 +176,18 @@ $imageUrl = $result['secure_url'];
      */
     public function destroy(string $id)
     {
-        //
+
+
+         // récupérer l'objet article via l'id
+
+         $Produit=Produit::find($id);
+
+
+         // delete with delete
+
+         $Produit->delete();
+
+         return back()->with('successdelete','You have successfully deleted a product.');
+
     }
 }
