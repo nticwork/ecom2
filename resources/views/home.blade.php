@@ -10,7 +10,7 @@
 <table class="table">
     <thead>
       <tr>
-        <th scope="col">Nom</th>
+        <th scope="col">Nom_Produit</th>
         <th scope="col">Prix</th>
         <th scope="col">Image</th>
          <th scope="col">Actions</th>
