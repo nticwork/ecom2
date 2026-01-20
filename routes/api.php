@@ -29,6 +29,14 @@ Route::delete('produits/{produit}', [ApiProductController::class, 'destroy']);
 
 
 
+PUT → mise à jour complète (tout l’objet)
+
+PATCH → mise à jour partielle (un ou quelques champs)
+
+👉 En Laravel : même méthode update(), seule la requête envoyée change.
+
+
+
 
 */
 
