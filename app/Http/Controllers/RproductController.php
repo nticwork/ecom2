@@ -152,12 +152,27 @@ $imageUrl = $result['secure_url'];
          $Produit->categorie=$categorie;
          if($request->hasFile('image')) {
             $image=$request->file('image')->getClientOriginalName();
-// enregistrer dans le dossier (public\images)
+// upload cloudinary
 
 
-$request->file('image')->move(public_path('imgs'), $image);
 
-        }else{
+
+$cloudinary = new Cloudinary([
+    'cloud' => [
+        'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+        'api_key'    => env('CLOUDINARY_API_KEY'),
+        'api_secret' => env('CLOUDINARY_API_SECRET'),
+    ],
+]);
+
+$result = $cloudinary->uploadApi()->upload(
+    $request->file('image')->getRealPath(),
+    [
+        'folder' => 'produits',
+    ]
+);
+
+$image = $result['secure_url'];   }else{
             $image= $Produit->image;
         }
          $Produit->image=$image;
